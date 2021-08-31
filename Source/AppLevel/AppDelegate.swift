@@ -14,11 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let homeViewController = ViewController()
-        homeViewController.view.backgroundColor = UIColor.red
-        window?.rootViewController = homeViewController
-        window?.makeKeyAndVisible()
+        
+        setRootViewController(for: &window)
         return true
+    }
+    
+    private func setRootViewController(for window: inout UIWindow?) {
+        let newsListViewController = NewsListViewController()
+        newsListViewController.view.backgroundColor = UIColor(named: "primaryBackgroundColor")
+        let navigationController = UINavigationController(rootViewController: newsListViewController)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 }
 
