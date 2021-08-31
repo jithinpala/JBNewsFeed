@@ -19,6 +19,7 @@ final class NewsListViewModel {
     weak var display: NewsListDisplay?
     var service: NewsFeedServicesProtocol
     let title = "News Feed"
+    var paginationNumber: Int = 1
     
     init(display: NewsListDisplay,
          service: NewsFeedServicesProtocol = NewsFeedServices()) {
@@ -32,15 +33,38 @@ final class NewsListViewModel {
     
     func fetchNewsFeed(shouldShowIndicator: Bool) {
         if shouldShowIndicator {
+            paginationNumber = 1
             display?.showLoadingIndicator()
         }
-        service.fetchNewsFeed { [weak self] result in
+        service.fetchNewsFeed(pagination: paginationNumber) { [weak self] result in
             self?.display?.hideLoadingIndicator()
             switch result {
             case .success(let news):
                 self?.articleViewModel = news.articles?.map {
                     ArticleViewModel(article: $0)
                 } ?? []
+                self?.paginationNumber = news.currentPage ?? 0
+                self?.display?.reloadDisplay()
+            case .failure(_):
+                self?.display?.showErrorAlert(DisplayErrorAlertViewModel())
+            }
+        }
+    }
+    
+    func loadMoreNewsFeed() {
+        paginationNumber += 1
+        service.fetchNewsFeed(pagination: paginationNumber) { [weak self] result in
+            switch result {
+            case .success(let news):
+                let viewModels = news.articles?.map {
+                    ArticleViewModel(article: $0)
+                } ?? []
+                if viewModels.count > 0 {
+                    viewModels.forEach {
+                        self?.articleViewModel.append($0)
+                    }
+                }
+                self?.paginationNumber = news.currentPage ?? 0
                 self?.display?.reloadDisplay()
             case .failure(_):
                 self?.display?.showErrorAlert(DisplayErrorAlertViewModel())
@@ -56,11 +80,11 @@ final class NewsListViewModel {
         1
     }
     
-    func numberOfItems() -> Int {
-        articleViewModel.count
-    }
-    
     func item(at indexPath: IndexPath) -> ArticleViewModel {
         articleViewModel[indexPath.row]
+    }
+    
+    func numberOfRows() -> Int {
+        articleViewModel.count > 0 ? articleViewModel.count + 1 : 0
     }
 }

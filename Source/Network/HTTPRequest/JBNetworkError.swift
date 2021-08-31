@@ -16,6 +16,8 @@ enum JBNetworkError: Error {
     case networkTimeout
 
     case requestCancelled
+    
+    case imageCreation
 
     case badRequest(withStatusCode: HTTPStatusCode, responseError: Error?)
     

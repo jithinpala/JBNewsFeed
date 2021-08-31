@@ -5,7 +5,7 @@
 //  Created by Jithin Balan on 30/8/21.
 //
 
-import Foundation
+import UIKit
 
 typealias HTTPHeaders = [String: String]
 
@@ -14,6 +14,7 @@ final class JBNetworkService: NSObject {
     private(set) var session: URLSession!
     
     typealias DataTaskCompletionHandler = (Result<(URLResponse, Data), JBNetworkError>) -> Void
+    typealias ImageDownloadCompletionHandler = (Result<UIImage, JBNetworkError>) -> Void
     
     enum HeaderKeys {
         static let apiKey = "x-api-key"
@@ -69,6 +70,22 @@ final class JBNetworkService: NSObject {
             }
         }
         task.resume()
+    }
+    
+    func getImage(withURL url: URL, completion: @escaping ImageDownloadCompletionHandler) {
+        let request = URLRequest(url: url)
+        genericDataTask(withRequest: request) { result in
+            switch result {
+            case let .success((_, data)):
+                guard let image = UIImage(data: data) else {
+                    completion(.failure(JBNetworkError.imageCreation))
+                    return
+                }
+                completion(.success(image))
+            case .failure(let error):
+                completion(.failure(JBNetworkError.undefined(error: error)))
+            }
+        }
     }
     
     private func parseNetworkErrors(with data: Data?, response: URLResponse?, error: Error?) -> JBNetworkError? {

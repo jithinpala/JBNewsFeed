@@ -21,6 +21,6 @@ struct Articles: Decodable {
         case publishedDate = "published_date"
         case excerpt
         case summary
-        case mediaUrl
+        case mediaUrl = "media"
     }
 }

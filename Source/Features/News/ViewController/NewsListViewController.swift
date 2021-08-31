@@ -12,7 +12,6 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     private let tableView = UITableView()
     private var refreshControl: UIRefreshControl!
     private lazy var viewModel = NewsListViewModel(display: self)
-    
     private var activityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
@@ -47,6 +46,7 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(fromClass: NewsListViewCell.self)
+        tableView.register(fromClass: LoadMoreViewCell.self)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
@@ -69,9 +69,11 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func showLoadingIndicator() {
         activityIndicatorView.startAnimating()
+        tableView.isHidden = true
     }
     
     func hideLoadingIndicator() {
+        tableView.isHidden = false
         activityIndicatorView.stopAnimating()
     }
     
@@ -99,13 +101,33 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfItems()
+        viewModel.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if isLastRow(indexPath) {
+            let cell = tableView.dequeue(LoadMoreViewCell.self, for: indexPath)
+            cell.configure()
+            return cell
+        }
+        
         let cell = tableView.dequeue(NewsListViewCell.self, for: indexPath)
         let articleViewModel = viewModel.item(at: indexPath)
         cell.configure(articleViewModel)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if isLastRow(indexPath) {
+            viewModel.loadMoreNewsFeed()
+        }
+    }
+    
+    private func isLastRow(_ indexPath: IndexPath) -> Bool {
+        let lastElement = viewModel.numberOfRows() - 1
+        if indexPath.row == lastElement && lastElement > 0 {
+            return true
+        }
+        return false
     }
 }

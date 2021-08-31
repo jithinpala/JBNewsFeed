@@ -11,8 +11,10 @@ class NewsListViewCell: UITableViewCell {
     
     private lazy var mediaImage: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "newsPlaceHolder")
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -112,8 +114,16 @@ class NewsListViewCell: UITableViewCell {
         self.selectionStyle = .none
         titleLabel.text = viewModel.title
         authorLabel.text = viewModel.author
-        publishedDateLabel.text = viewModel.publishedDate
+        publishedDateLabel.text = viewModel.mediaPublishedDate
         summaryLabel.text = viewModel.summary
+        
+        let placeHolderImage = UIImage(named: "newsPlaceHolder")
+        guard let url = viewModel.url
+        else {
+            mediaImage.image = placeHolderImage
+            return
+        }
+        mediaImage.setImageURL(url, placeholderImage: placeHolderImage)
     }
 
 }
