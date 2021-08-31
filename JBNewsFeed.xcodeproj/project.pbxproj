@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		5D22B0C826DDE7FC00FC1A8C /* LoadMoreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0C726DDE7FC00FC1A8C /* LoadMoreViewCell.swift */; };
 		5D22B0CA26DE00FF00FC1A8C /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0C926DE00FF00FC1A8C /* UIImageView+Extension.swift */; };
 		5D22B0CD26DE01BB00FC1A8C /* ImageCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0CC26DE01BB00FC1A8C /* ImageCacher.swift */; };
+		5D22B0D326DE1C0400FC1A8C /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 5D22B0D226DE1C0400FC1A8C /* Nimble */; };
+		5D22B0D626DE1C7E00FC1A8C /* NewsFeedServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0D526DE1C7E00FC1A8C /* NewsFeedServicesTests.swift */; };
 		5D7B8C2826DCE9B600FF879A /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C2726DCE9B600FF879A /* UITableView+Extension.swift */; };
 		5D7B8C2C26DCEAA000FF879A /* NewsListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C2B26DCEAA000FF879A /* NewsListViewCell.swift */; };
 		5D7B8C3326DD149C00FF879A /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C3226DD149C00FF879A /* NewsListViewModel.swift */; };
@@ -50,6 +52,7 @@
 		5D22B0C726DDE7FC00FC1A8C /* LoadMoreViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreViewCell.swift; sourceTree = "<group>"; };
 		5D22B0C926DE00FF00FC1A8C /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		5D22B0CC26DE01BB00FC1A8C /* ImageCacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacher.swift; sourceTree = "<group>"; };
+		5D22B0D526DE1C7E00FC1A8C /* NewsFeedServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedServicesTests.swift; sourceTree = "<group>"; };
 		5D7B8C2726DCE9B600FF879A /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5D7B8C2B26DCEAA000FF879A /* NewsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewCell.swift; sourceTree = "<group>"; };
 		5D7B8C3226DD149C00FF879A /* NewsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D22B0D326DE1C0400FC1A8C /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +113,22 @@
 				5D22B0CC26DE01BB00FC1A8C /* ImageCacher.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		5D22B0D426DE1C4A00FC1A8C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5D22B0D526DE1C7E00FC1A8C /* NewsFeedServicesTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5D22B0D726DE1CE600FC1A8C /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				5D99592E26DCD94500BB6961 /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		5D7B8C2626DCE97200FF879A /* Extensions */ = {
@@ -187,8 +207,9 @@
 		5D99592B26DCD94500BB6961 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5D22B0D726DE1CE600FC1A8C /* SupportingFiles */,
+				5D22B0D426DE1C4A00FC1A8C /* Services */,
 				5D99592C26DCD94500BB6961 /* JBNewsFeedTests.swift */,
-				5D99592E26DCD94500BB6961 /* Info.plist */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -287,6 +308,9 @@
 				5D99592A26DCD94500BB6961 /* PBXTargetDependency */,
 			);
 			name = JBNewsFeedTests;
+			packageProductDependencies = (
+				5D22B0D226DE1C0400FC1A8C /* Nimble */,
+			);
 			productName = JBNewsFeedTests;
 			productReference = 5D99592826DCD94500BB6961 /* JBNewsFeedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -318,6 +342,9 @@
 				Base,
 			);
 			mainGroup = 5D99590926DCD94300BB6961;
+			packageReferences = (
+				5D22B0D126DE1C0400FC1A8C /* XCRemoteSwiftPackageReference "Nimble" */,
+			);
 			productRefGroup = 5D99591326DCD94300BB6961 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -377,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D22B0D626DE1C7E00FC1A8C /* NewsFeedServicesTests.swift in Sources */,
 				5D99592D26DCD94500BB6961 /* JBNewsFeedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,7 +589,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = JBNewsFeedTests/Info.plist;
+				INFOPLIST_FILE = Tests/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -582,7 +610,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = JBNewsFeedTests/Info.plist;
+				INFOPLIST_FILE = Tests/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -628,6 +656,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5D22B0D126DE1C0400FC1A8C /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5D22B0D226DE1C0400FC1A8C /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D22B0D126DE1C0400FC1A8C /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5D99590A26DCD94300BB6961 /* Project object */;
 }
