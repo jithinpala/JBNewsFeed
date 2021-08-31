@@ -17,12 +17,12 @@ protocol NewsListDisplay: AnyObject {
 final class NewsListViewModel {
     private var articleViewModel = [ArticleViewModel]()
     weak var display: NewsListDisplay?
-    var service: NewsFeedServicesProtocol
+    var service: NewsFeedServiceProtocol
     let title = "News Feed"
     var paginationNumber: Int = 1
     
     init(display: NewsListDisplay,
-         service: NewsFeedServicesProtocol = NewsFeedServices()) {
+         service: NewsFeedServiceProtocol = NewsFeedService()) {
         self.display = display
         self.service = service
     }

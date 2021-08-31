@@ -1,5 +1,5 @@
 //
-//  NewsFeedServices.swift
+//  NewsFeedService.swift
 //  JBNewsFeed
 //
 //  Created by Jithin Balan on 31/8/21.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-typealias NewsFeedServicesResult = (Result <News, NewsFeedServicesError>) -> Void
+typealias NewsFeedServiceResult = (Result <News, NewsFeedServiceError>) -> Void
 
-protocol NewsFeedServicesProtocol {
-    func fetchNewsFeed(pagination: Int, completion: @escaping NewsFeedServicesResult)
+protocol NewsFeedServiceProtocol {
+    func fetchNewsFeed(pagination: Int, completion: @escaping NewsFeedServiceResult)
 }
 
-enum NewsFeedServicesError: Error {
+enum NewsFeedServiceError: Error {
     case failedToParseNewsFeed
     case failedToFetchNewsFeed
     case invalidRequest
@@ -27,7 +27,7 @@ enum NewsFeedServicesError: Error {
     }
 }
 
-final class NewsFeedServices: NewsFeedServicesProtocol {
+final class NewsFeedService: NewsFeedServiceProtocol {
     
     private enum QueryItem {
         static let query = "q"
@@ -43,7 +43,7 @@ final class NewsFeedServices: NewsFeedServicesProtocol {
         "https://api.newscatcherapi.com/v2/search"
     }
     
-    func fetchNewsFeed(pagination: Int, completion: @escaping NewsFeedServicesResult) {
+    func fetchNewsFeed(pagination: Int, completion: @escaping NewsFeedServiceResult) {
         guard let request = makeRequest(pagination)
         else {
             completion(.failure(.invalidRequest))
@@ -59,7 +59,7 @@ final class NewsFeedServices: NewsFeedServicesProtocol {
                     completion(.failure(.failedToParseNewsFeed))
                 }
             case let .failure(error):
-                let newsFeedError = NewsFeedServicesError(error: error as NSError)
+                let newsFeedError = NewsFeedServiceError(error: error as NSError)
                 completion(.failure(newsFeedError))
             }
         }
