@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5D22B0B726DD9CC500FC1A8C /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0B626DD9CC500FC1A8C /* HTTPStatusCode.swift */; };
+		5D22B0BB26DDAA8E00FC1A8C /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0BA26DDAA8E00FC1A8C /* News.swift */; };
+		5D22B0BD26DDAB4400FC1A8C /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0BC26DDAB4400FC1A8C /* Articles.swift */; };
+		5D22B0C026DDB03300FC1A8C /* NewsFeedServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0BF26DDB03300FC1A8C /* NewsFeedServices.swift */; };
 		5D7B8C2826DCE9B600FF879A /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C2726DCE9B600FF879A /* UITableView+Extension.swift */; };
 		5D7B8C2C26DCEAA000FF879A /* NewsListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C2B26DCEAA000FF879A /* NewsListViewCell.swift */; };
 		5D7B8C3326DD149C00FF879A /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C3226DD149C00FF879A /* NewsListViewModel.swift */; };
@@ -34,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		5D22B0B626DD9CC500FC1A8C /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		5D22B0BA26DDAA8E00FC1A8C /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		5D22B0BC26DDAB4400FC1A8C /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
+		5D22B0BF26DDB03300FC1A8C /* NewsFeedServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedServices.swift; sourceTree = "<group>"; };
 		5D7B8C2726DCE9B600FF879A /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5D7B8C2B26DCEAA000FF879A /* NewsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewCell.swift; sourceTree = "<group>"; };
 		5D7B8C3226DD149C00FF879A /* NewsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
@@ -70,6 +76,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D22B0B926DDAA2000FC1A8C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5D22B0BA26DDAA8E00FC1A8C /* News.swift */,
+				5D22B0BC26DDAB4400FC1A8C /* Articles.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5D22B0BE26DDB01800FC1A8C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5D22B0BF26DDB03300FC1A8C /* NewsFeedServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		5D7B8C2626DCE97200FF879A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +174,8 @@
 		5D99594526DCDA9500BB6961 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5D22B0BE26DDB01800FC1A8C /* Services */,
+				5D22B0B926DDAA2000FC1A8C /* Models */,
 				5D7B8C3426DD152D00FF879A /* Network */,
 				5D7B8C2626DCE97200FF879A /* Extensions */,
 				5D99594826DCDAEB00BB6961 /* AppLevel */,
@@ -307,12 +332,15 @@
 			files = (
 				5D7B8C3926DD190C00FF879A /* JBNetworkHelper.swift in Sources */,
 				5D99591626DCD94300BB6961 /* AppDelegate.swift in Sources */,
+				5D22B0C026DDB03300FC1A8C /* NewsFeedServices.swift in Sources */,
 				5D7B8C2C26DCEAA000FF879A /* NewsListViewCell.swift in Sources */,
 				5D7B8C3326DD149C00FF879A /* NewsListViewModel.swift in Sources */,
 				5D99595026DCE0E600BB6961 /* NewsListViewController.swift in Sources */,
 				5D7B8C3726DD159800FF879A /* JBNetworkService.swift in Sources */,
 				5D22B0B726DD9CC500FC1A8C /* HTTPStatusCode.swift in Sources */,
 				5D7B8C2826DCE9B600FF879A /* UITableView+Extension.swift in Sources */,
+				5D22B0BB26DDAA8E00FC1A8C /* News.swift in Sources */,
+				5D22B0BD26DDAB4400FC1A8C /* Articles.swift in Sources */,
 				5D7B8C3B26DD1A3200FF879A /* JBNetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
