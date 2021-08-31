@@ -21,6 +21,8 @@
 		5D22B0DB26DE300D00FC1A8C /* JBNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0DA26DE300D00FC1A8C /* JBNetworkServiceTests.swift */; };
 		5D22B0DD26DE319200FC1A8C /* JBNetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0DC26DE319200FC1A8C /* JBNetworkErrorTests.swift */; };
 		5D22B0E126DE340500FC1A8C /* NewsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22B0E026DE340500FC1A8C /* NewsListViewModelTests.swift */; };
+		5D22B0E426DE41D800FC1A8C /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5D22B0E326DE41D800FC1A8C /* Debug.xcconfig */; };
+		5D22B0E626DE41E900FC1A8C /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5D22B0E526DE41E900FC1A8C /* Release.xcconfig */; };
 		5D7B8C2826DCE9B600FF879A /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C2726DCE9B600FF879A /* UITableView+Extension.swift */; };
 		5D7B8C2C26DCEAA000FF879A /* NewsListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C2B26DCEAA000FF879A /* NewsListViewCell.swift */; };
 		5D7B8C3326DD149C00FF879A /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B8C3226DD149C00FF879A /* NewsListViewModel.swift */; };
@@ -58,6 +60,8 @@
 		5D22B0DA26DE300D00FC1A8C /* JBNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JBNetworkServiceTests.swift; sourceTree = "<group>"; };
 		5D22B0DC26DE319200FC1A8C /* JBNetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JBNetworkErrorTests.swift; sourceTree = "<group>"; };
 		5D22B0E026DE340500FC1A8C /* NewsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModelTests.swift; sourceTree = "<group>"; };
+		5D22B0E326DE41D800FC1A8C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		5D22B0E526DE41E900FC1A8C /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		5D7B8C2726DCE9B600FF879A /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5D7B8C2B26DCEAA000FF879A /* NewsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewCell.swift; sourceTree = "<group>"; };
 		5D7B8C3226DD149C00FF879A /* NewsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
@@ -168,6 +172,15 @@
 			path = News;
 			sourceTree = "<group>";
 		};
+		5D22B0E226DE41A500FC1A8C /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				5D22B0E326DE41D800FC1A8C /* Debug.xcconfig */,
+				5D22B0E526DE41E900FC1A8C /* Release.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
 		5D7B8C2626DCE97200FF879A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +284,7 @@
 		5D99594626DCDAC400BB6961 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				5D22B0E226DE41A500FC1A8C /* Configurations */,
 				5D99592026DCD94500BB6961 /* LaunchScreen.storyboard */,
 				5D99592326DCD94500BB6961 /* Info.plist */,
 			);
@@ -398,9 +412,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D22B0E426DE41D800FC1A8C /* Debug.xcconfig in Resources */,
 				5D99592226DCD94500BB6961 /* LaunchScreen.storyboard in Resources */,
 				5D99591F26DCD94500BB6961 /* Assets.xcassets in Resources */,
 				5D99594E26DCE07D00BB6961 /* Color.xcassets in Resources */,
+				5D22B0E626DE41E900FC1A8C /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +489,7 @@
 /* Begin XCBuildConfiguration section */
 		5D99593A26DCD94500BB6961 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D22B0E326DE41D800FC1A8C /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -534,6 +551,7 @@
 		};
 		5D99593B26DCD94500BB6961 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D22B0E526DE41E900FC1A8C /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
