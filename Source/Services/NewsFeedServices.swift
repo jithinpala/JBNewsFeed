@@ -9,7 +9,11 @@ import Foundation
 
 typealias NewsFeedServicesResult = (Result <News, NSError>) -> Void
 
-final class NewsFeedServices {
+protocol NewsFeedServicesProtocol {
+    func fetchNewsFeed(completion: @escaping NewsFeedServicesResult)
+}
+
+final class NewsFeedServices: NewsFeedServicesProtocol {
     
     private enum QueryItem {
         static let query = "q"

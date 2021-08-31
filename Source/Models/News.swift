@@ -8,9 +8,9 @@
 import Foundation
 
 struct News: Decodable {
-    let totalPage: Int
-    let currentPage: Int
-    let articles: [Articles]
+    let totalPage: Int?
+    let currentPage: Int?
+    let articles: [Articles]?
     
     enum CodingKeys: String, CodingKey {
         case totalPage = "total_pages"

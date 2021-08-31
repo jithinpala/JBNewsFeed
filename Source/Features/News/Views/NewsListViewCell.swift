@@ -108,12 +108,12 @@ class NewsListViewCell: UITableViewCell {
         summaryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15).isActive = true
     }
     
-    func configure() {
+    func configure(_ viewModel: ArticleViewModel) {
         self.selectionStyle = .none
-        titleLabel.text = "I'm trying to set a font programmatically. I want to use System Semibold like I'm using in the interface builder. Been looking for it on the list of fonts."
-        authorLabel.text = "Maria Merano"
-        publishedDateLabel.text = "2021-08-26 03:00:02"
-        summaryLabel.text = "By\n\nTesla has rolled out an update to its mobile app recently, featuring a completely revamped user interface, some novel new functions, and direct access to the online Tesla Shop. The Tesla mobile app will play a significant role once the company opens up its Supercharger network to non-Tesla electric vehicles.Â\n\nOne of the biggest changes to the Tesla App is the Tesla Shop, which would allow owners to order accessories and other items for their vehicles directly from their mobile devices. âS"
+        titleLabel.text = viewModel.title
+        authorLabel.text = viewModel.author
+        publishedDateLabel.text = viewModel.publishedDate
+        summaryLabel.text = viewModel.summary
     }
 
 }
