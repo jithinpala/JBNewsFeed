@@ -34,6 +34,7 @@
 		5D99592226DCD94500BB6961 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D99592026DCD94500BB6961 /* LaunchScreen.storyboard */; };
 		5D99594E26DCE07D00BB6961 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D99594D26DCE07D00BB6961 /* Color.xcassets */; };
 		5D99595026DCE0E600BB6961 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99594F26DCE0E600BB6961 /* NewsListViewController.swift */; };
+		EDC6AD462B4CB2D600C0A484 /* NewsFeedEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6AD452B4CB2D600C0A484 /* NewsFeedEndPoints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		5D99592E26DCD94500BB6961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D99594D26DCE07D00BB6961 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		5D99594F26DCE0E600BB6961 /* NewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
+		EDC6AD452B4CB2D600C0A484 /* NewsFeedEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedEndPoints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +112,9 @@
 		5D22B0BE26DDB01800FC1A8C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5D22B0B926DDAA2000FC1A8C /* Models */,
 				5D22B0BF26DDB03300FC1A8C /* NewsFeedService.swift */,
+				EDC6AD452B4CB2D600C0A484 /* NewsFeedEndPoints.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -269,8 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				5D22B0CB26DE01A200FC1A8C /* Common */,
-				5D22B0BE26DDB01800FC1A8C /* Services */,
-				5D22B0B926DDAA2000FC1A8C /* Models */,
 				5D7B8C3426DD152D00FF879A /* Network */,
 				5D7B8C2626DCE97200FF879A /* Extensions */,
 				5D99594826DCDAEB00BB6961 /* AppLevel */,
@@ -319,6 +321,7 @@
 		5D99594A26DCDC1A00BB6961 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				5D22B0BE26DDB01800FC1A8C /* Services */,
 				5D7B8C3126DD147C00FF879A /* ViewModel */,
 				5D7B8C2A26DCEA7500FF879A /* ViewController */,
 				5D7B8C2926DCEA6D00FF879A /* Views */,
@@ -447,6 +450,7 @@
 				5D7B8C3726DD159800FF879A /* JBNetworkService.swift in Sources */,
 				5D22B0CA26DE00FF00FC1A8C /* UIImageView+Extension.swift in Sources */,
 				5D22B0B726DD9CC500FC1A8C /* HTTPStatusCode.swift in Sources */,
+				EDC6AD462B4CB2D600C0A484 /* NewsFeedEndPoints.swift in Sources */,
 				5D7B8C2826DCE9B600FF879A /* UITableView+Extension.swift in Sources */,
 				5D22B0BB26DDAA8E00FC1A8C /* News.swift in Sources */,
 				5D22B0BD26DDAB4400FC1A8C /* Articles.swift in Sources */,
