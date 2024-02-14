@@ -5,19 +5,32 @@
 //  Created by Jithin Balan on 30/8/21.
 //
 
+import Combine
 import UIKit
 
-class NewsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewsListDisplay {
+class NewsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let tableView = UITableView()
+    private let viewModel: NewsListViewModel
     private var refreshControl: UIRefreshControl!
-    private lazy var viewModel = NewsListViewModel(display: self)
     private var activityIndicatorView = UIActivityIndicatorView()
+    private var subscriptions = Set<AnyCancellable>()
+
+    init(viewModel: NewsListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "primaryBackgroundColor")
         setupView()
         
+        setupBindings()
         viewModel.viewDidLoad()
         addRefreshController()
     }
@@ -31,6 +44,17 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     @objc func pullToRefreshDidTrigger() {
         viewModel.pullToRefreshDidTrigger()
     }
+
+    private func setupBindings() {
+        viewModel.onDataLoad.sink { [weak self] status in
+            if status == .loading {
+                self?.showLoadingIndicator()
+            } else {
+                self?.hideLoadingIndicator()
+                self?.reloadDisplay()
+            }
+        }.store(in: &subscriptions)
+    }
     
     private func setupView() {
         title = viewModel.title
@@ -38,9 +62,7 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
         view.addSubview(activityIndicatorView)
         
         activityIndicatorView.style = .gray
-        if #available(iOS 13.0, *) {
-            activityIndicatorView.style = .large
-        }
+        activityIndicatorView.style = .large
         activityIndicatorView.hidesWhenStopped = true
         
         tableView.delegate = self
@@ -78,10 +100,14 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func reloadDisplay() {
-        tableView.reloadData()
         if refreshControl.isRefreshing {
             stopPullToRefresh()
         }
+        if viewModel.shouldShowErrorAlert {
+            showErrorAlert(viewModel.errorAlertViewModel)
+            return
+        }
+        tableView.reloadData()
     }
     
     func stopPullToRefresh() {

@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setRootViewController(for window: inout UIWindow?) {
-        let newsListViewController = NewsListViewController()
-        newsListViewController.view.backgroundColor = UIColor(named: "primaryBackgroundColor")
+        let viewModel = NewsListViewModel()
+        let newsListViewController = NewsListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: newsListViewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

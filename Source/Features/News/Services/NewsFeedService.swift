@@ -5,12 +5,15 @@
 //  Created by Jithin Balan on 31/8/21.
 //
 
+import Combine
 import Foundation
 
-typealias NewsFeedServiceResult = (Result <News, NewsFeedServiceError>) -> Void
+typealias NewsFeedServiceModelResult = Result<News, NewsFeedServiceError>
+typealias NewsFeedServiceCallBack = (NewsFeedServiceModelResult) -> Void
 
 protocol NewsFeedServiceProtocol {
-    func fetchNewsFeed(pagination: Int, completion: @escaping NewsFeedServiceResult)
+    var newsListSubject: PassthroughSubject<NewsFeedServiceModelResult, Never> { get }
+    func fetchNewsFeed(pagination: Int)
 }
 
 enum NewsFeedServiceError: Error {
@@ -31,25 +34,27 @@ final class NewsFeedService: NewsFeedServiceProtocol {
     
     private let endPoint: NewsFeedEndPoints = NewsFeedEndPoints()
     private let networkService = JBNetworkService()
+
+    let newsListSubject = PassthroughSubject<NewsFeedServiceModelResult, Never>()
     
-    func fetchNewsFeed(pagination: Int, completion: @escaping NewsFeedServiceResult) {
+    func fetchNewsFeed(pagination: Int) {
         guard let request = endPoint.makeRequest(pagination)
         else {
-            completion(.failure(.invalidRequest))
+            newsListSubject.send(.failure(.invalidRequest))
             return
         }
-        networkService.genericDataTask(withRequest: request) { result in
+        networkService.genericDataTask(withRequest: request) { [weak self] result in
             switch result {
             case let .success((_, data)):
                 do {
                     let newsFeed = try JSONDecoder().decode(News.self, from: data)
-                    completion(.success(newsFeed))
+                    self?.newsListSubject.send(.success(newsFeed))
                 } catch (_) {
-                    completion(.failure(.failedToParseNewsFeed))
+                    self?.newsListSubject.send(.failure(.failedToParseNewsFeed))
                 }
             case let .failure(error):
                 let newsFeedError = NewsFeedServiceError(error: error as NSError)
-                completion(.failure(newsFeedError))
+                self?.newsListSubject.send(.failure(newsFeedError))
             }
         }
     }

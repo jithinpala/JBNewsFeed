@@ -5,26 +5,34 @@
 //  Created by Jithin Balan on 30/8/21.
 //
 
+import Combine
 import Foundation
 
-protocol NewsListDisplay: AnyObject {
-    func showLoadingIndicator()
-    func hideLoadingIndicator()
-    func reloadDisplay()
-    func showErrorAlert(_ viewModel: DisplayErrorAlertViewModel)
+enum NewsListDataStatus {
+    case loading
+    case finished
 }
 
 final class NewsListViewModel {
     private var articleViewModel = [ArticleViewModel]()
-    weak var display: NewsListDisplay?
+    private var subscriptions = Set<AnyCancellable>()
     var service: NewsFeedServiceProtocol
     let title = "News Feed"
     var paginationNumber: Int = 1
     
-    init(display: NewsListDisplay,
-         service: NewsFeedServiceProtocol = NewsFeedService()) {
-        self.display = display
+    let onDataLoad = PassthroughSubject<NewsListDataStatus, Never>()
+    
+    var shouldShowErrorAlert: Bool {
+        articleViewModel.isEmpty
+    }
+
+    var errorAlertViewModel: DisplayErrorAlertViewModel {
+        DisplayErrorAlertViewModel()
+    }
+    
+    init(service: NewsFeedServiceProtocol = NewsFeedService()) {
         self.service = service
+        setupBindings()
     }
     
     func viewDidLoad() {
@@ -34,42 +42,37 @@ final class NewsListViewModel {
     func fetchNewsFeed(shouldShowIndicator: Bool) {
         if shouldShowIndicator {
             paginationNumber = 1
-            display?.showLoadingIndicator()
+            onDataLoad.send(.loading)
         }
-        service.fetchNewsFeed(pagination: paginationNumber) { [weak self] result in
-            self?.display?.hideLoadingIndicator()
-            switch result {
-            case .success(let news):
-                self?.articleViewModel = news.articles?.map {
-                    ArticleViewModel(article: $0)
-                } ?? []
-                self?.paginationNumber = news.currentPage ?? 0
-                self?.display?.reloadDisplay()
-            case .failure(_):
-                self?.display?.showErrorAlert(DisplayErrorAlertViewModel())
-            }
-        }
+        service.fetchNewsFeed(pagination: paginationNumber)
+    }
+
+    private func setupBindings() {
+        service.newsListSubject.receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case let .success(news):
+                    let viewModels = news.articles?.map {
+                        ArticleViewModel(article: $0)
+                    } ?? []
+                    
+                    if viewModels.count > 0 {
+                        viewModels.forEach {
+                            self.articleViewModel.append($0)
+                        }
+                    }
+                    self.paginationNumber = news.currentPage ?? 0
+                case .failure:
+                    print("Server error, need to handle")
+                }
+                self.onDataLoad.send(.finished)
+            }.store(in: &subscriptions)
     }
     
     func loadMoreNewsFeed() {
         paginationNumber += 1
-        service.fetchNewsFeed(pagination: paginationNumber) { [weak self] result in
-            switch result {
-            case .success(let news):
-                let viewModels = news.articles?.map {
-                    ArticleViewModel(article: $0)
-                } ?? []
-                if viewModels.count > 0 {
-                    viewModels.forEach {
-                        self?.articleViewModel.append($0)
-                    }
-                }
-                self?.paginationNumber = news.currentPage ?? 0
-                self?.display?.reloadDisplay()
-            case .failure(_):
-                self?.display?.showErrorAlert(DisplayErrorAlertViewModel())
-            }
-        }
+        service.fetchNewsFeed(pagination: paginationNumber)
     }
     
     func pullToRefreshDidTrigger() {
